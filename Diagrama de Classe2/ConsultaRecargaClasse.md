@@ -14,6 +14,7 @@ class Bilhete {
     -saldo: float
     -cotaRestante: float
     -historicoRecargas: List<Recarga>
+    + atualizarDados()
 }
 
 class Recarga {
@@ -24,11 +25,9 @@ class Recarga {
 class Sistema {
     + requisaoPagamento()
     + requisaoLiquidacao()
-    + validaCredencial()
 }
 
 class Aplicativo {
-    + atualizarDados()
 }
 
 Usuario --> Aplicativo : "interage"
