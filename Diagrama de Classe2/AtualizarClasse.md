@@ -10,12 +10,12 @@ class Usuario {
 class AbaAtualizacao {
     - linhas: String
     - Status: String
-    + atualizarDados()
+    + solicitarDadosAtualizados()
 }
 
 class Sistema {
     - dadosAtualizados List<Linha>
-    + solicitarDadosAtualizados()
+    + atualizarDados()
     + processaFeedback()
 }
 

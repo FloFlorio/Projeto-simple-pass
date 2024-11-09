@@ -4,6 +4,7 @@
 class Usuario {
     - id: String
     - abas: String
+    + selecionarAba()
 }
 
 class Abas {

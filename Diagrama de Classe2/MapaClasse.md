@@ -8,16 +8,22 @@ class Usuario {
 
 class Mapa {
     - Mapa
+    + mostrarMapa():
 }
 
 class Sistema {
     - dadosMapa
+    + verificarAPI():
+    + validaLocalizacao()
+    + consultaCaminho()
 }
 
 class Caminho {
     - distancia: float
     - estacoes: List<Estacao>
     - duracao: int
+    + consultaCaminhoPorNome()
+    + consultaCaminhoPorMapa()
 }
 
 class Estações {
