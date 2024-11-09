@@ -21,13 +21,13 @@ activate Sistema_interno
 Sistema_interno -> interface_externa : compraSaldo()
 activate interface_externa
 
-interface_externa -> Sistema_externo_Bancos : requesicaoPagamento()
+interface_externa -> Sistema_externo_Bancos : requisicaoPagamento()
 activate Sistema_externo_Bancos
 Sistema_externo_Bancos --> interface_externa : Resposta do pagamento
 deactivate Sistema_externo_Bancos
-interface_externa -> Sistema_externo_Bancos : requesicaoLiquidamento()
+interface_externa -> Sistema_externo_Bancos : requisicaoConfirmacaoPagamento()
 activate Sistema_externo_Bancos
-Sistema_externo_Bancos --> interface_externa : Resposta de Liquidamento
+Sistema_externo_Bancos --> interface_externa : Confirmação de pagamento
 deactivate Sistema_externo_Bancos
 
 interface_externa --> Sistema_interno : situação compra
