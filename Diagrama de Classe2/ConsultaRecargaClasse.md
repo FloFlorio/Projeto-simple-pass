@@ -7,6 +7,7 @@ class Usuario {
     + comprarPassagem()
     + comprarSaldo()
     + consultaCartao()
+    + validaCredenciais()
 }
 
 class Bilhete {
