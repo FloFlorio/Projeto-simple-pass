@@ -6,9 +6,9 @@
 
 actor Usuario as U #lightblue
 participant Aplicativo as A #lightgreen
-participant Sistema_interno as SI #lightyellow
+participant Servidor as SI #lightyellow
 boundary interface_externa as IE #lightgrey
-participant Sistema_externo_trans as SET #lightcoral
+participant API_SPTRANS as SET #lightcoral
 
 ref over U, A, SI : ValidaCredencialSequencia
 activate U
