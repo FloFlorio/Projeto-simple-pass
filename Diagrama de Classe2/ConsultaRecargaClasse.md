@@ -1,5 +1,10 @@
 ```plantuml
 @startuml
+skinparam class {
+    BackgroundColor #F4F4F4
+    BorderColor #2E86C1
+    ArrowColor #117A65
+}
 
 class Usuario {
     - id: String
@@ -11,15 +16,15 @@ class Usuario {
 }
 
 class Bilhete {
-    -saldo: float
-    -cotaRestante: float
-    -historicoRecargas: List<Recarga>
+    - saldo: float
+    - cotaRestante: float
+    - historicoRecargas: List<Recarga>
     + atualizarDados()
 }
 
 class Recarga {
-    -valor: float
-    -data: String
+    - valor: float
+    - data: String
 }
 
 class Sistema {
@@ -28,12 +33,14 @@ class Sistema {
 }
 
 class Aplicativo {
+    + iniciar()
+    + finalizar()
 }
 
-Usuario --> Aplicativo : "interage"
-Aplicativo --> Sistema : "verifica"
-Aplicativo --> Bilhete : "consulta"
-Bilhete --> Recarga : "contém"
-Sistema --> Bilhete : "processa recarga"
+Usuario "1" --> "1" Aplicativo : "interage"
+Aplicativo "1" --> "*" Sistema : "verifica"
+Aplicativo "1" --> "1" Bilhete : "consulta"
+Bilhete "1" --> "*" Recarga : "contém"
+Sistema "1" --> "1" Bilhete : "processa recarga"
 
 @enduml
