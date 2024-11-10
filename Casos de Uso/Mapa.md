@@ -2,7 +2,7 @@
 @startuml
 left to right direction
 actor Usuário
-actor Sistema
+actor Sistema as  "API's Metrô e CPTM"
 rectangle MapaMetro {
 Usuário -- (Ver mapa completo das linhas ferroviárias)
 Usuário -- (Pesquisar por nome de estações)
