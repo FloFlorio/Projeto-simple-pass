@@ -4,36 +4,32 @@
 ```plantuml
 @startuml
 
-actor Usuario 
-participant Aplicativo
-participant Sistema_interno
-boundary interface_externa
-participant Sistema_externo_trans
+actor Usuario as U #lightblue
+participant Aplicativo as A #lightgreen
+participant Sistema_interno as SI #lightyellow
+boundary interface_externa as IE #lightgrey
+participant Sistema_externo_trans as SET #lightcoral
 
-
-ref over Usuario, Aplicativo, Sistema_interno : ValidaCredencialSequencia
-activate Usuario
-activate Aplicativo
+ref over U, A, SI : ValidaCredencialSequencia
+activate U
+activate A
 
 alt credenciais validas
-    
-    
-    Usuario -> Aplicativo : Pede saldo de um cartão
-    Aplicativo -> interface_externa : consultaCartao()
-    activate interface_externa
-    interface_externa -> Sistema_externo_trans : consultaCartao()
-    activate Sistema_externo_trans
+    U -> A : Pede saldo de um cartão
+    A -> IE : consultaCartao()
+    activate IE
+    IE -> SET : consultaCartao()
+    activate SET
 
-    Sistema_externo_trans --> interface_externa : infomação do cartao
-    deactivate Sistema_externo_trans
-    interface_externa --> Aplicativo : infomação do cartao
-    deactivate interface_externa
-    Aplicativo --> Usuario : Apresenta informações 
+    SET --> IE : Informação do cartão
+    deactivate SET
+    IE --> A : Informação do cartão
+    deactivate IE
+    A --> U : Apresenta informações
 
-    |||
 else credenciais não validas
-    Aplicativo --> Usuario : Informa tipo de erro
-    |||
+    A --> U : Informa tipo de erro
 end
 
 @enduml
+

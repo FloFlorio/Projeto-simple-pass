@@ -2,59 +2,59 @@
 
 @startuml
 
-actor Usuario 
-participant Aplicativo
-participant Sistema_interno
-boundary interface_externa
-participant Sistema_externo_mapa
+actor Usuario as U #lightblue
+participant Aplicativo as A #lightgreen
+participant Sistema_interno as SI #lightyellow
+boundary interface_externa as IE #lightgrey
+participant Sistema_externo_mapa as SEM #lightcoral
 
-ref over Usuario, Aplicativo, Sistema_interno : ValidaCredencialSequencia
-activate Usuario
-activate Aplicativo
+ref over U, A, SI : ValidaCredencialSequencia
+activate U
+activate A
 
 alt localizacao por pesquisa
-    Usuario -> Aplicativo : Pesquisa nome do lugar
-    Aplicativo -> Sistema_interno : validaLocalizacao()
-    activate Sistema_interno
+    U -> A : Pesquisa nome do lugar
+    A -> SI : validaLocalizacao()
+    activate SI
 
     alt localizacao encontrada
-        Sistema_interno --> Aplicativo : Localizacao validada
-        deactivate Sistema_interno
+        SI --> A : Localizacao validada
+        deactivate SI
 
-        Aplicativo -> interface_externa : consultaCaminhoPorNome()
-        activate interface_externa
-        interface_externa -> Sistema_externo_mapa : consultaCaminho()
-        activate Sistema_externo_mapa
+        A -> IE : consultaCaminhoPorNome()
+        activate IE
+        IE -> SEM : consultaCaminho()
+        activate SEM
 
-        Sistema_externo_mapa --> interface_externa : Melhor caminho
-        deactivate Sistema_externo_mapa
-        interface_externa --> Aplicativo : Melhor caminho encontrado
-        deactivate interface_externa
-        Aplicativo --> Usuario : Apresenta melhor caminho
+        SEM --> IE : Melhor caminho
+        deactivate SEM
+        IE --> A : Melhor caminho encontrado
+        deactivate IE
+        A --> U : Apresenta melhor caminho
 
     else localizacao não encontrada
-        deactivate Sistema_interno
-        Aplicativo --> Usuario : Informa que a localização não foi encontrada
+        deactivate SI
+        A --> U : Informa que a localização não foi encontrada
     end
 
 else localizacao pelo mapa
-    Usuario -> Aplicativo : Seleciona local no mapa
-    Aplicativo -> Sistema_interno : validaLocalizacao()
-    activate Sistema_interno
+    U -> A : Seleciona local no mapa
+    A -> SI : validaLocalizacao()
+    activate SI
 
-    Sistema_interno --> Aplicativo : Localizacao validada
-    deactivate Sistema_interno
+    SI --> A : Localizacao validada
+    deactivate SI
 
-    Aplicativo -> interface_externa : consultaCaminhoPorMapa()
-    activate interface_externa
-    interface_externa -> Sistema_externo_mapa : consultaCaminho()
-    activate Sistema_externo_mapa
+    A -> IE : consultaCaminhoPorMapa()
+    activate IE
+    IE -> SEM : consultaCaminho()
+    activate SEM
 
-    Sistema_externo_mapa --> interface_externa : Melhor caminho
-    deactivate Sistema_externo_mapa
-    interface_externa --> Aplicativo : Melhor caminho encontrado
-    deactivate interface_externa
-    Aplicativo --> Usuario : Apresenta melhor caminho
+    SEM --> IE : Melhor caminho
+    deactivate SEM
+    IE --> A : Melhor caminho encontrado
+    deactivate IE
+    A --> U : Apresenta melhor caminho
 end
 
 @enduml
