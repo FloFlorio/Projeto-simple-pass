@@ -5,7 +5,7 @@
 actor Usuario as U #lightblue
 participant Aplicativo as A #lightgreen
 participant Servidor as SI #lightyellow
-boundary interface_externa as IE #lightgrey
+
 participant Sistema_externo_suporte as SES #lightcoral
 
 activate U
