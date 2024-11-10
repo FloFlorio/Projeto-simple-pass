@@ -3,7 +3,7 @@
 
 actor Usuario as U #lightblue
 participant Aplicativo as A #lightgreen
-participant Sistema as SI #lightyellow
+participant Servidor as SI #lightyellow
 participant API as API #lightgrey
 
 U -> A: visualizarStatusLinhas()
