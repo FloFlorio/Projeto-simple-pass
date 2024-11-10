@@ -1,23 +1,24 @@
 ```plantuml
 @startuml
-actor Usuario
-participant Aplicativo
-participant Sistema
-participant API
 
-Usuario -> Aplicativo: visualizarStatusLinhas()
-Aplicativo -> Sistema: solicitarDadosAtualizados()
-Sistema -> API: obterStatusLinhas()
+actor Usuario as U #lightblue
+participant Aplicativo as A #lightgreen
+participant Sistema as SI #lightyellow
+participant API as API #lightgrey
+
+U -> A: visualizarStatusLinhas()
+A -> SI: solicitarDadosAtualizados()
+SI -> API: obterStatusLinhas()
 
 alt Dados atualizados
-    API --> Sistema: Novos status das linhas
-    Sistema -> Sistema: atualizarDados()
-    Sistema --> Aplicativo: Dados atualizados
-    Aplicativo -> Usuario: Exibir status atualizado das linhas
+    API --> SI: Novos status das linhas
+    SI -> SI: atualizarDados()
+    SI --> A: Dados atualizados
+    A -> U: Exibir status atualizado das linhas
 else Dados não atualizados
-    API --> Sistema: Dados sem alterações
-    Sistema --> Aplicativo: Dados inalterados
-    Aplicativo -> Usuario: Exibir mensagem "Dados atualizados recentemente"
+    API --> SI: Dados sem alterações
+    SI --> A: Dados inalterados
+    A -> U: Exibir mensagem "Dados atualizados recentemente"
 end
 
 @enduml

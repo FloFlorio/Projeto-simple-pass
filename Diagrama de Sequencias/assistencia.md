@@ -2,35 +2,37 @@
 
 @startuml
 
-actor Usuario 
-participant Aplicativo
-participant Sistema_interno
-boundary interface_externa
-participant Sistema_externo_suporte
+actor Usuario as U #lightblue
+participant Aplicativo as A #lightgreen
+participant Sistema_interno as SI #lightyellow
+boundary interface_externa as IE #lightgrey
+participant Sistema_externo_suporte as SES #lightcoral
 
-activate Usuario
-activate Aplicativo
+activate U
+activate A
 
-Usuario -> Aplicativo : Solicita assistência
-Aplicativo -> Sistema_interno : identificaProblema()
-activate Sistema_interno
+U -> A : Solicita assistência
+A -> SI : identificaProblema()
+activate SI
 
-alt problema comum
-    Sistema_interno --> Aplicativo : Solução para problema comum
-    deactivate Sistema_interno
-    Aplicativo --> Usuario : Informa solução
+alt Problema comum
+    SI --> A : Solução para problema comum
+    deactivate SI
+    A --> U : Informa solução
 
-else problema não comum
-    Sistema_interno --> Aplicativo : Redireciona para suporte
-    deactivate Sistema_interno
+else Problema não comum
+    SI --> A : Redireciona para suporte
+    deactivate SI
 
-    Aplicativo -> Sistema_externo_suporte : solicitaSuporte()
-    activate Sistema_externo_suporte
+    A -> SES : solicitaSuporte()
+    activate SES
 
-    Sistema_externo_suporte --> Aplicativo : Instruções para contato
-    deactivate Sistema_externo_suporte
+    SES --> A : Instruções para contato
+    deactivate SES
 
-    Aplicativo --> Usuario : Informa como entrar em contato com suporte
+    A --> U : Informa como entrar em contato com suporte
 end
+
+@enduml
 
 @enduml

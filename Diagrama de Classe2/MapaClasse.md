@@ -1,5 +1,11 @@
 ```plantuml
-@startUML
+@startuml
+
+skinparam class {
+    BackgroundColor #F4F4F4
+    BorderColor #2E86C1
+    ArrowColor #117A65
+}
 
 class Usuario {
     - id: String
@@ -7,13 +13,13 @@ class Usuario {
 }
 
 class Mapa {
-    - Mapa
-    + mostrarMapa():
+    - dadosMapa: String
+    + mostrarMapa()
 }
 
 class Sistema {
-    - dadosMapa
-    + verificarAPI():
+    - dadosMapa: String
+    + verificarAPI()
     + validaLocalizacao()
     + consultaCaminho()
 }
@@ -26,20 +32,23 @@ class Caminho {
     + consultaCaminhoPorMapa()
 }
 
-class Estações {
+class Estacao {
     - nome: String
     - local: String
-    - descrição: String
+    - descricao: String
 }
 
 class Aplicativo {
+    + iniciar()
+    + finalizar()
 }
 
-Usuario --> Aplicativo : "interage"
-Aplicativo --> Sistema : "verifica"
-Aplicativo --> Mapa : "exibe"
-Mapa --> Sistema : "obtém dados"
-Mapa --> Caminho : "encontra"
-Caminho --> Estações : "contém"
+Usuario "1" --> "1" Aplicativo : "Interage com"
+Aplicativo "1" --> "1 " Sistema : "Verifica dados em"
+Aplicativo "1" --> "1" Mapa : "Exibe informações de"
+Mapa "1" --> "1   " Sistema : "Obtém dados de"
+Mapa "1" --> "*" Caminho : "Encontra rota em"
+Caminho "1" --> "*" Estacao : "Inclui várias"
 
-@endUMLs
+@enduml
+

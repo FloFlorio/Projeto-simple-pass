@@ -2,29 +2,30 @@
 
 @startuml
 
-actor Usuario
-participant Aplicativo
-participant Sistema_interno
-boundary interface_externa
+actor Usuario as U #lightblue
+participant Aplicativo as A #lightgreen
+participant Sistema_interno as SI #lightyellow
+boundary interface_externa as IE #lightgrey
 
-activate Usuario
-activate Aplicativo
+activate U
+activate A
 
-Usuario -> Aplicativo : Reporta situação da linha 
-Aplicativo -> Sistema_interno : processaFeedback()
-activate Sistema_interno
+U -> A : Reporta situação da linha 
+A -> SI : processaFeedback()
+activate SI
 
 alt feedback válido
-    Sistema_interno --> Aplicativo : mostrarFeedback()
-    deactivate Sistema_interno
+    SI --> A : mostrarFeedback()
+    deactivate SI
 
-    Aplicativo --> Usuario : Confirmar feedback enviado
-    Aplicativo -> interface_externa : Notifica sobre nova situação
+    A --> U : Confirmar feedback enviado
+    A -> IE : Notifica sobre nova situação
 else feedback inválido
-    Sistema_interno --> Aplicativo : Informa erro no feedback
-    deactivate Sistema_interno
+    SI --> A : Informa erro no feedback
+    deactivate SI
 
-    Aplicativo --> Usuario : Informa erro no envio
+    A --> U : Informa erro no envio
 end
 
 @enduml
+

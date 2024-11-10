@@ -3,48 +3,47 @@
 ```plantuml
 @startuml
 
-actor Usuario 
-participant Aplicativo
-participant Sistema_interno
-boundary interface_externa
-participant Sistema_externo_Bancos
+actor Usuario as U #lightblue
+participant Aplicativo as A #lightgreen
+participant Sistema_interno as SI #lightyellow
+boundary interface_externa as IE #lightgrey
+participant Sistema_externo_Bancos as SEB #lightcoral
 
-activate Usuario
-activate Aplicativo
-ref over Usuario, Aplicativo, Sistema_interno : ValidaCredencialSequencia
+activate U
+activate A
+ref over U, A, SI : ValidaCredencialSequencia
 
+U -> A : Informa quantidade de passagens
 
-Usuario -> Aplicativo : Informa quantidade de passagens
+A -> SI : compraSaldo()
+activate SI
+SI -> IE : compraSaldo()
+activate IE
 
-Aplicativo -> Sistema_interno : compraSaldo()
-activate Sistema_interno
-Sistema_interno -> interface_externa : compraSaldo()
-activate interface_externa
+IE -> SEB : requisicaoPagamento()
+activate SEB
+SEB --> IE : Resposta do pagamento
+deactivate SEB
+IE -> SEB : requisicaoConfirmacaoPagamento()
+activate SEB
+SEB --> IE : Confirmação de pagamento
+deactivate SEB
 
-interface_externa -> Sistema_externo_Bancos : requisicaoPagamento()
-activate Sistema_externo_Bancos
-Sistema_externo_Bancos --> interface_externa : Resposta do pagamento
-deactivate Sistema_externo_Bancos
-interface_externa -> Sistema_externo_Bancos : requisicaoConfirmacaoPagamento()
-activate Sistema_externo_Bancos
-Sistema_externo_Bancos --> interface_externa : Confirmação de pagamento
-deactivate Sistema_externo_Bancos
-
-interface_externa --> Sistema_interno : situação compra
-deactivate interface_externa
+IE --> SI : situação compra
+deactivate IE
 
 
 alt compra efetuada
 
-    Sistema_interno -> Sistema_interno : gerarRecibo()
-    activate Sistema_interno
-    Sistema_interno --> Sistema_interno :  Recibo
-    deactivate Sistema_interno
+    SI -> SI : gerarRecibo()
+    activate SI
+    SI --> SI : Recibo
+    deactivate SI
 
-    Sistema_interno --> Aplicativo : Recibo
-    deactivate Sistema_interno
+    SI --> A : Recibo
+    deactivate SI
 
-    Aplicativo --> Usuario : Recibo e mensagem de confimação
+    A --> U : Recibo e mensagem de confirmação
     
     
 
@@ -54,5 +53,5 @@ else compra não efetuada
 |||
 end
 
-
 @enduml
+

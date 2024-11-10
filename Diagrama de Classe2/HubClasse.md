@@ -1,6 +1,12 @@
 ```plantuml
 @startuml
 
+skinparam class {
+    BackgroundColor #F4F4F4
+    BorderColor #2E86C1
+    ArrowColor #117A65
+}
+
 class Usuario {
     - id: String
     - abas: String
@@ -12,17 +18,22 @@ class Abas {
     - consultaRecarga: String
     - atualizarLinhas: String
     - mostrarMapa: String
+    + exibirConteudo()
 }
 
 class Sistema {
+    + processarConsulta()
+    + atualizarInformacoes()
 }
 
 class Aplicativo {
+    + iniciar()
+    + finalizar()
 }
 
-Usuario --> Aplicativo : "interage"
-Aplicativo --> Sistema : "verifica"
-Aplicativo --> Abas : "exibe"
+Usuario "1" --> "1" Aplicativo : "interage"
+Aplicativo "1" --> "*" Sistema : "verifica"
+Aplicativo "1" --> "*" Abas : "exibe"
 
 @enduml
 

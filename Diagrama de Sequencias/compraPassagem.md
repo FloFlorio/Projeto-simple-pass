@@ -3,46 +3,45 @@
 ```plantuml
 @startuml
 
-actor Usuario 
-participant Aplicativo
-participant Sistema_interno
-boundary interface_externa
-participant Sistema_externo_trans
+actor Usuario as U #lightblue
+participant Aplicativo as A #lightgreen
+participant Sistema_interno as SI #lightyellow
+boundary interface_externa as IE #lightgrey
+participant Sistema_externo_trans as SET #lightcoral
 
-activate Usuario
-activate Aplicativo
-ref over Usuario, Aplicativo, Sistema_interno : ValidaCredencialSequencia
-
+activate U
+activate A
+ref over U, A, SI : ValidaCredencialSequencia
 
 alt credenciais validas
-    Usuario -> Aplicativo : Informa quantidade de passagens
+    U -> A : Informa quantidade de passagens
 
     alt Saldo disponível na conta
-    Aplicativo -> interface_externa : Compra de passagens
-    interface_externa -> Sistema_externo_trans : ComprarPassagem()
-    Sistema_externo_trans --> interface_externa : compra resposta
-    interface_externa --> Aplicativo : compra resposta
+    A -> IE : Compra de passagens
+    IE -> SET : ComprarPassagem()
+    SET --> IE : compra resposta
+    IE --> A : compra resposta
 
         alt Compra Ok
-            Aplicativo ->> Sistema_interno : atualizaDados()
-            activate Sistema_interno
-            Sistema_interno ->> Aplicativo : mensagem de confirmação
-            deactivate Sistema_interno
-            Aplicativo --> Usuario : mensagem de confirmação
+            A ->> SI : atualizaDados()
+            activate SI
+            SI ->> A : mensagem de confirmação
+            deactivate SI
+            A --> U : mensagem de confirmação
 
         |||
         else Compra não Ok
-            Aplicativo --> Usuario : Informa tipo de erro
+            A --> U : Informa tipo de erro
         end
         |||
 
     else Saldo indisponível na conta
-    Aplicativo --> Usuario : Saldo indisponível
+    A --> U : Saldo indisponível
     end
     |||
 
 else credenciais não validas
-    Aplicativo --> Usuario : Informa tipo de erro
+    A --> U : Informa tipo de erro
     
 end
 |||
