@@ -19,7 +19,7 @@ class AbaAtualizacao {
 }
 
 class Sistema {
-    - dadosAtualizados : List<Linha>
+    - dadosAtualizados: List_Linha
     + atualizarDados()
     + processaFeedback()
 }
@@ -35,10 +35,9 @@ class Aplicativo {
     + finalizar()
 }
 
-Usuario  -->  Aplicativo : "interage"
-Aplicativo  -->  Sistema : "verifica"
-AbaAtualizacao  -->  Sistema : "obtém dados"
-AbaAtualizacao  -->  Linha : "exibe"
+Usuario --> Aplicativo : interage
+Aplicativo --> Sistema : verifica
+AbaAtualizacao --> Sistema : obtém dados
+AbaAtualizacao --> Linha : exibe
 
 @enduml
-```
