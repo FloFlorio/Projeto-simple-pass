@@ -10,7 +10,6 @@ participant Servidor as SI #lightyellow
 boundary interface_externa as IE #lightgrey
 participant API_SPTRANS as SET #lightcoral
 
-ref over U, A, SI : ValidaCredencialSequencia
 activate U
 activate A
 
@@ -31,5 +30,7 @@ else credenciais não validas
     A --> U : Informa tipo de erro
 end
 
-@enduml
+deactivate A
+deactivate U
 
+@enduml
