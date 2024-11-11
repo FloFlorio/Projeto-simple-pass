@@ -26,7 +26,7 @@ class Sistema {
 
 class Caminho {
     - distancia: float
-    - estacoes: List<Estacao>
+    - estacoes: List_Estacao
     - duracao: int
     + consultaCaminhoPorNome()
     + consultaCaminhoPorMapa()
@@ -44,9 +44,9 @@ class Aplicativo {
 }
 
 Usuario "1" --> "1" Aplicativo : "Interage com"
-Aplicativo "1" --> "1 " Sistema : "Verifica dados em"
+Aplicativo "1" --> "1" Sistema : "Verifica dados em"
 Aplicativo "1" --> "1" Mapa : "Exibe informações de"
-Mapa "1" --> "1   " Sistema : "Obtém dados de"
+Mapa "1" --> "1" Sistema : "Obtém dados de"
 Mapa "1" --> "*" Caminho : "Encontra rota em"
 Caminho "1" --> "*" Estacao : "Inclui várias"
 
