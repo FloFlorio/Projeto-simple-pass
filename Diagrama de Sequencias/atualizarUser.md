@@ -27,5 +27,8 @@ else feedback inválido
     A --> U : Informa erro no envio
 end
 
+deactivate A
+deactivate U
+
 @enduml
 
