@@ -29,21 +29,18 @@ alt credenciais validas
             deactivate SI
             A --> U : mensagem de confirmação
 
-        |||
         else Compra não Ok
             A --> U : Informa tipo de erro
         end
-        |||
 
     else Saldo indisponível na conta
     A --> U : Saldo indisponível
     end
-    |||
 
 else credenciais não validas
     A --> U : Informa tipo de erro
     
 end
-|||
 
 @enduml
+
