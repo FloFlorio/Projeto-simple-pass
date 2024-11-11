@@ -31,9 +31,10 @@ class Aplicativo {
     + finalizar()
 }
 
-Usuario "1" --> "1" Aplicativo : "interage"
-Aplicativo "1" --> "*" Sistema : "verifica"
-Aplicativo "1" --> "*" Abas : "exibe"
+Usuario "1" --> "1" Aplicativo : interage
+Aplicativo "1" --> "*" Sistema : verifica
+Aplicativo "1" --> "*" Abas : exibe
 
 @enduml
+
 
