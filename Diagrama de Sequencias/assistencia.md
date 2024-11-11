@@ -1,11 +1,9 @@
 ```plantuml
-
 @startuml
 
 actor Usuario as U #lightblue
 participant Aplicativo as A #lightgreen
 participant Servidor as SI #lightyellow
-
 participant Sistema_externo_suporte as SES #lightcoral
 
 activate U
@@ -33,6 +31,7 @@ else Problema não comum
     A --> U : Informa como entrar em contato com suporte
 end
 
-@enduml
+deactivate A
+deactivate U
 
 @enduml
