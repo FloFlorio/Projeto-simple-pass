@@ -2,10 +2,9 @@
 @startuml
 left to right direction
 actor Usuário
-actor Sistema as  "API's Metrô e CPTM"
+actor Sistema as "APIs Metrô e CPTM"
 rectangle AtualizaçãoLinhas {
-Usuário -- (Ver linhas disponíveis no momento)
-(Fornecer em tempo real status das linhas\n[operação normal, redução de velocidade e paralisação]) -- Sistema
+    Usuário --> (Ver linhas disponíveis no momento)
+    Sistema --> (Fornecer em tempo real status das linhas\n[operação normal, redução de velocidade e paralisação])
 }
 @enduml
-´´´
