@@ -18,7 +18,7 @@ class Usuario {
 class Bilhete {
     - saldo: float
     - cotaRestante: float
-    - historicoRecargas: List<Recarga>
+    - historicoRecargas: List_Recarga
     + atualizarDados()
 }
 
@@ -37,10 +37,10 @@ class Aplicativo {
     + finalizar()
 }
 
-Usuario "1" --> "1" Aplicativo : "interage"
-Aplicativo "1" --> "*" Sistema : "verifica"
-Aplicativo "1" --> "1" Bilhete : "consulta"
-Bilhete "1" --> "*" Recarga : "contém"
-Sistema "1" --> "1" Bilhete : "processa recarga"
+Usuario "1" --> "1" Aplicativo : interage
+Aplicativo "1" --> "*" Sistema : verifica
+Aplicativo "1" --> "1" Bilhete : consulta
+Bilhete "1" --> "*" Recarga : contém
+Sistema "1" --> "1" Bilhete : processa recarga
 
 @enduml
