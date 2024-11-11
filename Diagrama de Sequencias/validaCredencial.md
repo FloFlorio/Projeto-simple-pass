@@ -8,7 +8,7 @@ actor Usuario as U #lightblue
 participant Aplicativo as A #lightgreen
 participant Servidor as SI #lightyellow
 
-loop  >5 times
+loop 5 times
     activate U
     U -> A : Login e senha
 
@@ -20,12 +20,14 @@ loop  >5 times
 
     alt credenciais validas
         A --> U : Permite entrar em acesso privado
-        |||
     else credenciais não validas
         A --> U : Informa tipo de erro
-        |||
     end
 end
 
+deactivate A
+deactivate U
+
 @enduml
+
 
