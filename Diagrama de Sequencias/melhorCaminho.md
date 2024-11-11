@@ -57,7 +57,7 @@ else localizacao pelo mapa
     A --> U : Apresenta melhor caminho
 end
 
+deactivate A
+deactivate U
+
 @enduml
-
-
-
