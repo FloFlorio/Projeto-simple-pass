@@ -32,9 +32,7 @@ deactivate SEB
 IE --> SI : situação compra
 deactivate IE
 
-
 alt compra efetuada
-
     SI -> SI : gerarRecibo()
     activate SI
     SI --> SI : Recibo
@@ -44,14 +42,11 @@ alt compra efetuada
     deactivate SI
 
     A --> U : Recibo e mensagem de confirmação
-    
-    
 
-|||
 else compra não efetuada
-
-|||
+    A --> U : Informa erro na compra
 end
 
 @enduml
+
 
