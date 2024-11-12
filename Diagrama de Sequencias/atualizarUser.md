@@ -6,6 +6,7 @@ actor Usuario as U #lightblue
 participant Aplicativo as A #lightgreen
 participant Servidor as SI #lightyellow
 boundary interface_externa as IE #lightgrey
+participant API_SPTRANS as SET #lightcoral
 
 activate U
 activate A
@@ -16,11 +17,18 @@ activate SI
 
 alt feedback válido
     SI --> A : mostrarFeedback()
+    SI -> IE : Notifica sobre nova situação
     deactivate SI
+    activate IE
+     IE -> SET : Notifica sobre nova situação
+    deactivate IE
 
     A --> U : Confirmar feedback enviado
-    A -> IE : Notifica sobre nova situação
+    
+   
+
 else feedback inválido
+    activate SI
     SI --> A : Informa erro no feedback
     deactivate SI
 
