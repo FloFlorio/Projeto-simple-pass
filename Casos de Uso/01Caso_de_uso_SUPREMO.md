@@ -3,43 +3,30 @@
 left to right direction
 
 actor Usuário
+actor Api_metro_cptm as "Api metrô e CPTM"
+actor Api_banco as "Api Bancos"
 
-package "Gestão de Saldo" {
-    rectangle ConsultaRecarga {
-        Usuário --> (Recargar Saldo)
-        Usuário --> (Consultar Saldo)
-        Usuário --> (Escolher entre TOP e bilhete único)
-        Usuário --> (Inserir as informações necessárias)
-        (Validar as informações de acesso) <<include>>
-    }
-
-    rectangle "Consulta de API" as ConsultaAPI {
-        (Conectar APIs do Bilhete Único e TOP)
-        (Conectar APIs de Bancos e Bilhete Único/TOP para pagamento)
-    }
+rectangle "SimplePass" {
+    Usuário --> (Recargar Saldo)
     
-    ConsultaRecarga -[hidden]-> ConsultaAPI
-}
-
-package "Informações de Transporte" {
-    rectangle AtualizaçãoLinhas {
-        Usuário --> (Ver linhas disponíveis no momento)
-        (Fornecer status das linhas em tempo real) <<include>>
-    }
-
-    rectangle MapaMetro {
-        Usuário --> (Ver mapa completo das linhas ferroviárias)
-        Usuário --> (Pesquisar por nome de estações)
-        Usuário --> (Visualizar uma linha específica)
-        Usuário --> (Baixar o mapa para uso offline)
-        (Exibir o mapa completo do metrô) <<include>>
-    }
-}
-
-package "Suporte e Feedback" {
-    Usuário -- (Procurar sua dúvida pelo FAQ)
-    Usuário -- (Reportar bugs do app)
-    Usuário -- (Dar feedbacks e sugestões)
+    Usuário --> (Consultar Saldo)
+    Usuário --> (Consultar Cota)
+    Usuário --> (Escolher vizualização entre TOP e bilhete único)
     
+    
+    Usuário --> (Ver linhas disponíveis no momento)
+    (Fornecer status das linhas em tempo real) <<include>>
+    Usuário --> (Ver mapa completo das linhas ferroviárias)
+    Usuário --> (Pesquisar por nome de estações)
+    Usuário --> (Visualizar uma linha específica)
+    Usuário --> (Baixar o mapa para uso offline)
+    (Fornecer o mapa completo do metrô) <<include>>
+
+    (Recargar Saldo) <-- Api_banco
+    (Consultar Cota) <-- Api_banco
+    (Consultar Saldo) <-- Api_banco
+    (Fornecer o mapa completo do metrô) <-- Api_metro_cptm
+    (Fornecer status das linhas em tempo real) <-- Api_metro_cptm
 }
+    
 @enduml
