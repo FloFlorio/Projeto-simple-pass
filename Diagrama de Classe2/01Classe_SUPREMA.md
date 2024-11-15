@@ -6,35 +6,65 @@ skinparam class {
     ArrowColor #117A65
 }
 
-class VisualizarStatusLinhas {
-    + exibirStatus()
+Class Usuário{
+    - id: String
+    + validarUsuario()
 }
 
-class MostrarFeedback {
-    + coletarFeedback()
-    + exibirFeedback()
+class Bilhete {
+    -saldo: float
+    -cotaRestante: float
+    -historicoRecargas: List<Recarga>
+    + atualizarDados()
 }
 
-class ComprarPassagem {
-    + iniciarCompra()
-    + concluirCompra()
+class Estações {
+    - nome: String
+    - local: String
+    - descrição: String
 }
 
-class ConsultaCartao {
+class Atualizações_Linhas{
+    - status: String
+    - tempoEstimado: int
+    + obterStatusLinhas()
+}
+
+class Mapa {
+    - Mapa
+    + mostrarMapa():
+}
+
+class Caminho {
+    - distancia: float
+    - estacoes: List<Estacao>
+    - duracao: int
+    + consultaCaminhoPorNome()
+    + consultaCaminhoPorMapa()
+}
+
+class Recarga {
+    -valor: float
+    -data: String
+    + recarregarValor()
+}
+
+class Consulta {
+    -valor: float
     + verificarSaldo()
     + consultarCota()
 }
 
-class SelecionarAba {
-    + escolherAba()
-    + exibirConteudo()
-}
-
-VisualizarStatusLinhas --> ConsultaCartao : depende de
-MostrarFeedback --> VisualizarStatusLinhas : utiliza para obter status
-ComprarPassagem --> ConsultaCartao : verifica saldo antes
-SelecionarAba --> VisualizarStatusLinhas : exibe status
-SelecionarAba --> MostrarFeedback : solicita feedback
+Usuário --> Bilhete 
+Usuário --> Estações 
+Usuário --> Atualizações_Linhas 
+Usuário --> Mapa
+Usuário --> Caminho 
+Usuário --> Recarga
+Usuário --> Consulta
+Mapa --> Caminho
+Mapa --> Estações
+Bilhete --> Recarga
+Bilhete --> Consulta
 
 @enduml
-
