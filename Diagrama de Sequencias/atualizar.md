@@ -2,9 +2,9 @@
 @startuml
 
 actor Usuario as U #lightblue
-participant Aplicativo as A #lightgreen
-participant Servidor as SI #lightyellow
-participant API as API #lightgrey
+boundary Aplicativo as A #lightgreen
+control Servidor as SI #lightyellow
+entity API as API #lightgrey
 
 U -> A : visualizarStatusLinhas()
 A -> SI : solicitarDadosAtualizados()
