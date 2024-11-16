@@ -2,9 +2,9 @@
 @startuml
 
 actor Usuario as U #lightblue
-participant Aplicativo as A #lightgreen
-participant Servidor as SI #lightyellow
-participant Sistema_externo_suporte as SES #lightcoral
+boundary Aplicativo as A #lightgreen
+control Servidor as SI #lightyellow
+entity Sistema_externo_suporte as SES #lightcoral
 
 activate U
 activate A
