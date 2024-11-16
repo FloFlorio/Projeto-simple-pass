@@ -5,8 +5,8 @@
 @startuml
 
 actor Usuario as U #lightblue
-participant Aplicativo as A #lightgreen
-participant Servidor as SI #lightyellow
+boundary Aplicativo as A #lightgreen
+control Servidor as SI #lightyellow
 
 loop 5 times
     activate U
