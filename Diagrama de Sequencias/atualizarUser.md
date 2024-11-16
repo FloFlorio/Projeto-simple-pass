@@ -3,10 +3,10 @@
 @startuml
 
 actor Usuario as U #lightblue
-participant Aplicativo as A #lightgreen
-participant Servidor as SI #lightyellow
+boundary Aplicativo as A #lightgreen
+control Servidor as SI #lightyellow
 boundary interface_externa as IE #lightgrey
-participant API_SPTRANS as SET #lightcoral
+entity API_SPTRANS as SET #lightcoral
 
 activate U
 activate A
