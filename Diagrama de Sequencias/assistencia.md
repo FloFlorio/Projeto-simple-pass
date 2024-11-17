@@ -1,37 +1,20 @@
 ```plantuml
 @startuml
-
 actor Usuario as U #lightblue
-boundary Aplicativo as A #lightgreen
-control Servidor as SI #lightyellow
-entity Sistema_externo_suporte as SES #lightcoral
+control SistemaInterno as SI #lightgreen
 
 activate U
-activate A
-
-U -> A : Solicita assistência
-A -> SI : identificaProblema()
 activate SI
 
+U -> SI : Solicita assistência
+
 alt Problema comum
-    SI --> A : Solução para problema comum
-    deactivate SI
-    A --> U : Informa solução
+    SI --> U : Solução para problema comum
 
 else Problema não comum
-    SI --> A : Redireciona para suporte
-    deactivate SI
-
-    A -> SES : solicitaSuporte()
-    activate SES
-
-    SES --> A : Instruções para contato
-    deactivate SES
-
-    A --> U : Informa como entrar em contato com suporte
+    SI --> U : Redireciona para suporte manual
 end
 
-deactivate A
+deactivate SI
 deactivate U
-
 @enduml
