@@ -2,62 +2,53 @@
 
 @startuml
 
-actor Usuario as U #lightblue
-boundary Aplicativo as A #lightgreen
-control Servidor as SI #lightyellow
-boundary interface_externa as IE #lightgrey
-entity API_SPTRANS as SEM #lightcoral
+actor Usuario como U #lightblue
+control SistemaInterno como SI #lightgreen
+boundary interface_externa como IE #lightgrey
+entity API_SPTRANS como SEM #lightcoral
 
-ref over U, A, SI : ValidaCredencialSequencia
+ref over U, SI : ValidaCredencialSequencia
 activate U
-activate A
+activate SI
 
 alt localizacao por pesquisa
-    U -> A : Pesquisa nome do lugar
-    A -> SI : validaLocalizacao()
-    activate SI
+    U -> SI : Pesquisa nome do lugar
+    SI -> SI : validaLocalizacao()
 
     alt localizacao encontrada
-        SI --> A : Localizacao validada
-        deactivate SI
-
-        A -> IE : consultaCaminhoPorNome()
+        SI -> IE : consultaCaminhoPorNome()
         activate IE
         IE -> SEM : consultaCaminho()
         activate SEM
 
         SEM --> IE : Melhor caminho
         deactivate SEM
-        IE --> A : Melhor caminho encontrado
+        IE --> SI : Melhor caminho encontrado
         deactivate IE
-        A --> U : Apresenta melhor caminho
+        SI --> U : Apresenta melhor caminho
 
     else localizacao não encontrada
-        deactivate SI
-        A --> U : Informa que a localização não foi encontrada
+        SI --> U : Informa que a localização não foi encontrada
     end
 
 else localizacao pelo mapa
-    U -> A : Seleciona local no mapa
-    A -> SI : validaLocalizacao()
-    activate SI
+    U -> SI : Seleciona local no mapa
+    SI -> SI : validaLocalizacao()
 
-    SI --> A : Localizacao validada
-    deactivate SI
-
-    A -> IE : consultaCaminhoPorMapa()
+    SI -> IE : consultaCaminhoPorMapa()
     activate IE
     IE -> SEM : consultaCaminho()
     activate SEM
 
     SEM --> IE : Melhor caminho
     deactivate SEM
-    IE --> A : Melhor caminho encontrado
+    IE --> SI : Melhor caminho encontrado
     deactivate IE
-    A --> U : Apresenta melhor caminho
+    SI --> U : Apresenta melhor caminho
 end
 
-deactivate A
+deactivate SI
 deactivate U
 
 @enduml
+
