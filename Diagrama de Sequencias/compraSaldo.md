@@ -1,22 +1,18 @@
-# Diagrama de Sequencia: Compra de saldo
 
 ```plantuml
 @startuml
 
-actor Usuario as U #lightblue
-boundary Aplicativo as A #lightgreen
-control Servidor as SI #lightyellow
-boundary interface_externa as IE #lightgrey
-entity API_Banco as SEB #lightcoral
+actor Usuario como U #lightblue
+control SistemaInterno como SI #lightgreen
+boundary interface_externa como IE #lightgrey
+entity API_Banco como SEB #lightcoral
 
 activate U
-activate A
-ref over U, A, SI : ValidaCredencialSequencia
-
-U -> A : Informa quantidade de passagens
-
-A -> SI : compraSaldo()
 activate SI
+ref over U, SI : ValidaCredencialSequencia
+
+U -> SI : Informa quantidade de passagens
+
 SI -> IE : compraSaldo()
 activate IE
 
@@ -38,15 +34,16 @@ alt compra efetuada
     SI --> SI : Recibo
     deactivate SI
 
-    SI --> A : Recibo
-    deactivate SI
-
-    A --> U : Recibo e mensagem de confirmação
+    SI --> U : Recibo e mensagem de confirmação
 
 else compra não efetuada
-    A --> U : Informa erro na compra
+    SI --> U : Informa erro na compra
 end
 
+deactivate SI
+deactivate U
+
 @enduml
+
 
 
