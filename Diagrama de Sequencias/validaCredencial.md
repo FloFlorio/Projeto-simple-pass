@@ -4,28 +4,23 @@
 ```plantuml
 @startuml
 
-actor Usuario as U #lightblue
-boundary Aplicativo as A #lightgreen
-control Servidor as SI #lightyellow
+actor Usuario como U #lightblue
+control SistemaInterno como SI #lightgreen
 
 loop 5 times
     activate U
-    U -> A : Login e senha
+    U -> SI : Login e senha
 
-    activate A
-    A -> SI : validaCredenciais()
-    activate SI
-    SI --> A : Validação de Credenciais
-    deactivate SI
+    SI -> SI : validaCredenciais()
 
     alt credenciais validas
-        A --> U : Permite entrar em acesso privado
+        SI --> U : Permite entrar em acesso privado
     else credenciais não validas
-        A --> U : Informa tipo de erro
+        SI --> U : Informa tipo de erro
     end
 end
 
-deactivate A
+deactivate SI
 deactivate U
 
 @enduml
