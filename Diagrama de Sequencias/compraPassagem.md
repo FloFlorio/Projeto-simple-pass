@@ -4,43 +4,43 @@
 @startuml
 
 actor Usuario as U #lightblue
-boundary Aplicativo as A #lightgreen
-control Servidor as SI #lightyellow
+control SistemaInterno as SI #lightgreen
 boundary interface_externa as IE #lightgrey
 entity API_SPTRANS as SET #lightcoral
 
 activate U
-activate A
-ref over U, A, SI : ValidaCredencialSequencia
+activate SI
+ref over U, SI : ValidaCredencialSequencia
 
 alt credenciais validas
-    U -> A : Informa quantidade de passagens
+    U -> SI : Informa quantidade de passagens
 
     alt Saldo disponível na conta
-    A -> IE : Compra de passagens
+    SI -> IE : Compra de passagens
     IE -> SET : ComprarPassagem()
     SET --> IE : compra resposta
-    IE --> A : compra resposta
+    IE --> SI : compra resposta
 
         alt Compra Ok
-            A ->> SI : atualizaDados()
-            activate SI
-            SI ->> A : mensagem de confirmação
-            deactivate SI
-            A --> U : mensagem de confirmação
+            SI ->> SI : atualizaDados()
+            SI --> U : mensagem de confirmação
 
         else Compra não Ok
-            A --> U : Informa tipo de erro
+            SI --> U : Informa tipo de erro
         end
 
     else Saldo indisponível na conta
-    A --> U : Saldo indisponível
+    SI --> U : Saldo indisponível
     end
 
 else credenciais não validas
-    A --> U : Informa tipo de erro
+    SI --> U : Informa tipo de erro
     
 end
 
+deactivate SI
+deactivate U
+
 @enduml
+
 
