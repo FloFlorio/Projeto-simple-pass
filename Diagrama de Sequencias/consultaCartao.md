@@ -4,33 +4,33 @@
 ```plantuml
 @startuml
 
-actor Usuario as U #lightblue
-boundary Aplicativo as A #lightgreen
-control Servidor as SI #lightyellow
-boundary interface_externa as IE #lightgrey
-entity API_SPTRANS as SET #lightcoral
+actor Usuario como U #lightblue
+control SistemaInterno como SI #lightgreen
+boundary interface_externa como IE #lightgrey
+entity API_SPTRANS como SET #lightcoral
 
 activate U
-activate A
+activate SI
 
 alt credenciais validas
-    U -> A : Pede saldo de um cartão
-    A -> IE : consultaCartao()
+    U -> SI : Pede saldo de um cartão
+    SI -> IE : consultaCartao()
     activate IE
     IE -> SET : consultaCartao()
     activate SET
 
     SET --> IE : Informação do cartão
     deactivate SET
-    IE --> A : Informação do cartão
+    IE --> SI : Informação do cartão
     deactivate IE
-    A --> U : Apresenta informações
+    SI --> U : Apresenta informações
 
 else credenciais não validas
-    A --> U : Informa tipo de erro
+    SI --> U : Informa tipo de erro
 end
 
-deactivate A
+deactivate SI
 deactivate U
 
 @enduml
+
