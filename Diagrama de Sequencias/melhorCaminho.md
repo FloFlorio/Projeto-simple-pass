@@ -1,11 +1,11 @@
 ```plantuml
 
+
 @startuml
 
-actor Usuario como U #lightblue
-control SistemaInterno como SI #lightgreen
-boundary interface_externa como IE #lightgrey
-entity API_SPTRANS como SEM #lightcoral
+actor Usuario as U #lightblue
+control SistemaInterno as SI #lightgreen
+entity API_SPTRANS as SEM #lightcoral
 
 ref over U, SI : ValidaCredencialSequencia
 activate U
@@ -16,15 +16,10 @@ alt localizacao por pesquisa
     SI -> SI : validaLocalizacao()
 
     alt localizacao encontrada
-        SI -> IE : consultaCaminhoPorNome()
-        activate IE
-        IE -> SEM : consultaCaminho()
-        activate SEM
-
-        SEM --> IE : Melhor caminho
+        SI -> SEM : consultaCaminhoPorNome()
+        activate SI
         deactivate SEM
-        IE --> SI : Melhor caminho encontrado
-        deactivate IE
+        SEM --> SI : Melhor caminho encontrado
         SI --> U : Apresenta melhor caminho
 
     else localizacao não encontrada
@@ -35,15 +30,10 @@ else localizacao pelo mapa
     U -> SI : Seleciona local no mapa
     SI -> SI : validaLocalizacao()
 
-    SI -> IE : consultaCaminhoPorMapa()
-    activate IE
-    IE -> SEM : consultaCaminho()
+    SI -> SEM : consultaCaminhoPorMapa()
     activate SEM
 
-    SEM --> IE : Melhor caminho
-    deactivate SEM
-    IE --> SI : Melhor caminho encontrado
-    deactivate IE
+    SEM --> SI : Melhor caminho encontrado
     SI --> U : Apresenta melhor caminho
 end
 
@@ -51,4 +41,3 @@ deactivate SI
 deactivate U
 
 @enduml
-
