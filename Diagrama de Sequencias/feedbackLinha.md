@@ -2,10 +2,9 @@
 
 @startuml
 
-actor Usuario como U #lightblue
-control SistemaInterno como SI #lightgreen
-boundary interface_externa como IE #lightgrey
-entity API_SPTRANS como SET #lightcoral
+actor Usuario as U #lightblue
+control SistemaInterno as SI #lightgreen
+entity API_SPTRANS as SET #lightcoral
 
 activate U
 activate SI
@@ -14,10 +13,8 @@ U -> SI : Reporta situação da linha
 SI -> SI : processaFeedback()
 
 alt feedback válido
-    SI -> IE : Notifica sobre nova situação
-    activate IE
-    IE -> SET : Notifica sobre nova situação
-    deactivate IE
+    SI -> SET : Notifica sobre nova situação
+    activate SET
 
     SI --> U : Confirmar feedback enviado
 
@@ -29,5 +26,7 @@ deactivate SI
 deactivate U
 
 @enduml
+
+
 
 
