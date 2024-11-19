@@ -1,11 +1,9 @@
-
 ```plantuml
 @startuml
 
-actor Usuario como U #lightblue
-control SistemaInterno como SI #lightgreen
-boundary interface_externa como IE #lightgrey
-entity API_Banco como SEB #lightcoral
+actor Usuario as U #lightblue
+control SistemaInterno as SI #lightgreen
+entity API_Banco as SEB #lightcoral
 
 activate U
 activate SI
@@ -13,20 +11,18 @@ ref over U, SI : ValidaCredencialSequencia
 
 U -> SI : Informa quantidade de passagens
 
-SI -> IE : compraSaldo()
-activate IE
+U -> SI : compraSaldo()
 
-IE -> SEB : requisicaoPagamento()
+SI -> SEB : requisicaoPagamento()
 activate SEB
-SEB --> IE : Resposta do pagamento
+SEB --> SI : Resposta do pagamento
 deactivate SEB
-IE -> SEB : requisicaoConfirmacaoPagamento()
+SI -> SEB : requisicaoConfirmacaoPagamento()
 activate SEB
-SEB --> IE : Confirmação de pagamento
+SEB --> SI : Confirmação de pagamento
 deactivate SEB
 
-IE --> SI : situação compra
-deactivate IE
+SI --> U : situação compra
 
 alt compra efetuada
     SI -> SI : gerarRecibo()
@@ -44,6 +40,5 @@ deactivate SI
 deactivate U
 
 @enduml
-
 
 
