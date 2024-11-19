@@ -1,11 +1,10 @@
 # Diagrama de Sequencia: Validamento de credenciais
 
-
 ```plantuml
 @startuml
 
-actor Usuario como U #lightblue
-control SistemaInterno como SI #lightgreen
+actor Usuario as U #lightblue
+control SistemaInterno as SI #lightgreen
 
 loop 5 times
     activate U
@@ -24,5 +23,4 @@ deactivate SI
 deactivate U
 
 @enduml
-
 
