@@ -5,7 +5,6 @@
 
 actor Usuario as U #lightblue
 control SistemaInterno as SI #lightgreen
-boundary interface_externa as IE #lightgrey
 entity API_SPTRANS as SET #lightcoral
 
 activate U
@@ -16,10 +15,8 @@ alt credenciais validas
     U -> SI : Informa quantidade de passagens
 
     alt Saldo disponível na conta
-    SI -> IE : Compra de passagens
-    IE -> SET : ComprarPassagem()
-    SET --> IE : compra resposta
-    IE --> SI : compra resposta
+    SI -> SET : ComprarPassagem()
+    SET --> SI : compra resposta
 
         alt Compra Ok
             SI ->> SI : atualizaDados()
@@ -42,5 +39,4 @@ deactivate SI
 deactivate U
 
 @enduml
-
 
